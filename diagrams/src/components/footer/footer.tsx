@@ -1,6 +1,8 @@
 import * as React from "react";
 import { FunctionComponent } from "react";
 
+import "./Footer.css";
+
 type FooterProps = {
   title: string;
   paragraph?: string;
@@ -9,4 +11,4 @@ type FooterProps = {
 export const Footer: FunctionComponent<FooterProps> = ({
   title,
   paragraph = "Hello Footer"
-}) => <div>{paragraph}</div>;
+}) => <div className="Footer">{paragraph}</div>;
