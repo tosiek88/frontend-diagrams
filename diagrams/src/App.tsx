@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as React from "react";
+import { Component } from "react";
+import { Diagram } from "./components/diagram/diagram";
+import "./App.css";
+import { Header } from "./components/header/header";
+import { Footer } from "./components/footer/footer";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+type AppProps = {
+  msg: string;
+};
+
+export class App extends Component<AppProps> {
+  static defaultProps = {
+    msg: "App Hello"
+  };
+  render() {
+    return (
+      <div className="App">
+        <Header title="Header" />
+        <Diagram title="Main Diagram" />
+        <Footer title="Footer" />
+      </div>
+    );
+  }
 }
-
-export default App;
