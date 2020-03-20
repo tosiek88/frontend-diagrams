@@ -15,7 +15,7 @@ export class App extends Component<AppProps> {
   };
   render() {
     return (
-      <div className="App">
+      <div className="container">
         <Header title="Header" />
         <Diagram title="Main Diagram" />
         <Footer title="Footer" />
