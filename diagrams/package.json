@@ -145,6 +145,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-transform-typescript": "^7.9.0",
     "@emotion/styled": "^10.0.27",
     "@projectstorm/react-canvas-core": "^6.0.2",
     "closest": "0.0.1",

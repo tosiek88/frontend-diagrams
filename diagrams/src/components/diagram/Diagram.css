@@ -2,5 +2,6 @@
   background-color: var(--main-bg-color);
   padding: 16px;
   text-align: center;
+  height: 600px;
   grid-area: main;
 }
