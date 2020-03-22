@@ -6,20 +6,21 @@ import { Header } from "./components/header/header";
 import { Footer } from "./components/footer/footer";
 import axios from "axios";
 
+import * as SRD from "@projectstorm/react-diagrams";
 type AppProps = {
     msg?: string;
 };
 
 export class App extends Component<AppProps> {
     state = {
-        elements: []
+        elements: [],
+        engine: SRD.default()
     };
 
     private diagram: any = {};
     componentDidMount() {
         this.getData().then(({ data }) => {
             this.setState({ elements: data });
-            console.log(this.state);
         });
     }
 
@@ -31,7 +32,9 @@ export class App extends Component<AppProps> {
 
     preRenderDiagram = () => {
         if (this.state.elements.length > 0) {
-            return <Diagram elements={this.state.elements} />;
+            return (
+                <Diagram elements={this.state.elements} engine={this.state.engine} />
+            );
         } else {
             return null;
         }
