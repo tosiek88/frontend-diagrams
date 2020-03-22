@@ -29,16 +29,19 @@ export class App extends Component<AppProps> {
         return data;
     };
 
-    render() {
+    preRenderDiagram = () => {
         if (this.state.elements.length > 0) {
-            this.diagram = () => <Diagram elements={this.state.elements} />;
+            return <Diagram elements={this.state.elements} />;
         } else {
             return null;
         }
+    };
+
+    render() {
         return (
             <div className="container">
                 <Header title="Header" />
-                {this.diagram()}
+                {this.preRenderDiagram()}
                 <Footer title="Footer" />
             </div>
         );
