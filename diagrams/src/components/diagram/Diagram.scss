@@ -1,12 +1,8 @@
-import * as React from "react";
-import styled from "@emotion/styled";
-
-export interface DemoCanvasWidgetProps {
-    color?: string;
-    background?: string;
-}
-export const Container = styled.div<{ color: string; background: string }>`
+.Diagram {
+  padding: 16px;
+  text-align: center;
   height: 100%;
+  grid-area: main;
   background-color: rgb(60, 60, 60);
   background-size: 50px 50px;
   /* display: flex; */
@@ -39,17 +35,4 @@ export const Container = styled.div<{ color: string; background: string }>`
       transparent 77%,
       transparent
     );
-`;
-
-export class DemoCanvasWidget extends React.Component<DemoCanvasWidgetProps> {
-    render() {
-        return (
-            <Container
-                background={this.props.background || "rgb(60, 60, 60)"}
-                color={this.props.color || "rgba(255,255,255, 0.05)"}
-            >
-                {this.props.children}
-            </Container>
-        );
-    }
 }
