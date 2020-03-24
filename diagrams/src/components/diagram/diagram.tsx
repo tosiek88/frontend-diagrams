@@ -1,6 +1,5 @@
 import { CanvasWidget } from "@projectstorm/react-canvas-core";
 import {
-    DefaultLinkModel,
     DefaultNodeModel,
     DiagramEngine,
     DiagramModel
@@ -8,6 +7,7 @@ import {
 import * as React from "react";
 import { ElementProps } from "../element/element";
 import "./Diagram.scss";
+import * as events from "events";
 
 interface DiagramProps {
     elements: ElementProps[];
@@ -15,37 +15,34 @@ interface DiagramProps {
 }
 
 export class Diagram extends React.Component<DiagramProps> {
-    constructor({ elements, engine }: DiagramProps) {
-        super({ elements, engine });
+    private model: DiagramModel = new DiagramModel();
+    private nodes = this.model.getModels();
+    private diagramEvents = new events.EventEmitter();
+
+    private Init() {
+        this.diagramEvents.emit(`init`, `Init of Diagram`);
+    }
+
+    private preRender() {
+        this.props.elements.forEach((el, index) => {
+            let node = new DefaultNodeModel({
+                name: el.name,
+                color: "rgb(0,192,255)"
+            });
+            node.setPosition(100, 100 * (-index + 1));
+            this.nodes.push(node);
+        });
+        this.model.addAll(...this.nodes);
+        this.props.engine.setModel(this.model);
+    }
+
+    public onInit(fn: () => void) {
+        this.diagramEvents.on(`init`, fn);
     }
 
     render() {
-        var model = new DiagramModel();
-        console.log(model);
-
-        //3-A) create a default node
-        var node1 = new DefaultNodeModel({
-            name: "Node 1",
-            color: "rgb(0,192,255)"
-        });
-        node1.setPosition(100, 100);
-        let port1 = node1.addOutPort("Out");
-
-        //3-B) create another default node
-        var node2 = new DefaultNodeModel("Node 2", "rgb(192,255,0)");
-        let port2 = node2.addInPort("In");
-        node2.setPosition(400, 100);
-
-        // link the ports
-        let link1 = port1.link<DefaultLinkModel>(port2);
-        link1.getOptions().testName = "Test";
-        link1.addLabel("Hello World!");
-
-        //4) add the models to the root graph
-        model.addAll(node1, node2, link1);
-
-        //5) load model into engine
-        this.props.engine.setModel(model);
+        this.Init();
+        this.preRender();
 
         return (
             <div className="Diagram">

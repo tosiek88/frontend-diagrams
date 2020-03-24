@@ -150,6 +150,7 @@
     "@projectstorm/react-canvas-core": "^6.0.2",
     "closest": "0.0.1",
     "dagre": "^0.8.5",
+    "events": "^3.1.0",
     "mathjs": "^6.6.1",
     "node-sass": "^4.13.1",
     "pathfinding": "^0.4.18",
