@@ -25,6 +25,7 @@ export interface MainPortArgs {
     engine: DiagramEngine;
     size?: number;
 }
+// TODO Should be FC? Statless?
 export class MainPort extends React.Component<MainPortArgs> {
     render() {
         return (

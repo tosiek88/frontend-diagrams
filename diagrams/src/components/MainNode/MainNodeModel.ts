@@ -1,7 +1,8 @@
 import {
     NodeModel,
     NodeModelGenerics,
-    PortModelAlignment
+    PortModelAlignment,
+    PortModel
 } from "@projectstorm/react-diagrams";
 import { MainPortModel } from "./MainPortModel";
 
@@ -13,6 +14,8 @@ export interface MainNodeModelGenerics {
 export class MainNodeModel extends NodeModel<
     NodeModelGenerics & MainNodeModelGenerics
     > {
+    private inPorts: PortModel[] = [];
+    private outPort: PortModel[] = [];
     constructor() {
         super({
             type: "basic"
@@ -22,10 +25,15 @@ export class MainNodeModel extends NodeModel<
     }
 
     public addInputPort() {
-        this.addPort(new MainPortModel(PortModelAlignment.LEFT));
+        const portModel = new MainPortModel(PortModelAlignment.LEFT);
+        this.addPort(portModel);
+        this.inPorts.push(portModel);
     }
 
     public addOutputPort() {
-        this.addPort(new MainPortModel(PortModelAlignment.RIGHT));
+        const portModel = new MainPortModel(PortModelAlignment.RIGHT);
+        this.addPort(portModel);
+
+        this.outPort.push(portModel);
     }
 }

@@ -23,6 +23,8 @@ export class Diagram extends React.Component<DiagramProps> {
     private preRender() {
         this.props.elements.forEach((el, index) => {
             let node = new MainNodeModel();
+            node.addInputPort();
+            node.addOutputPort();
             node.setPosition(100, 150 * (-index + 1));
             this.nodes.push(node);
         });

@@ -1,7 +1,4 @@
-import createEngine, {
-    PortModelAlignment,
-    DiagramEngine
-} from "@projectstorm/react-diagrams";
+import createEngine, { DiagramEngine } from "@projectstorm/react-diagrams";
 import axios from "axios";
 import * as React from "react";
 import { Component } from "react";
