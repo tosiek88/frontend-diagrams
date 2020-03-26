@@ -1,28 +1,46 @@
+import createEngine, {
+    PortModelAlignment,
+    DiagramEngine
+} from "@projectstorm/react-diagrams";
+import axios from "axios";
 import * as React from "react";
 import { Component } from "react";
-import { Diagram } from "./components/diagram/diagram";
 import "./App.css";
-import { Header } from "./components/header/header";
+import { Diagram } from "./components/diagram/diagram";
 import { Footer } from "./components/footer/footer";
-import axios from "axios";
+import { Header } from "./components/header/header";
+import { SimplePortFactory } from "./components/MainNode/SimplePortFactory";
+import { MainPortModel } from "./components/MainNode/MainPortModel";
+import { MainNodeFactory } from "./components/MainNode/MainFactoryModel";
+import { DiamondPortModel } from "./components/custom-node/DiamondPortModel";
+import { DiamondNodeFactory } from "./components/custom-node/DiamondNodeFactory";
 
-import * as SRD from "@projectstorm/react-diagrams";
 type AppProps = {
     msg?: string;
 };
 
 export class App extends Component<AppProps> {
     state = {
-        elements: [],
-        engine: SRD.default()
+        elements: []
     };
-
-    private diagram: any = {};
-    componentDidMount() {
-        this.getData().then(({ data }) => {
-            this.setState({ elements: data });
-        });
+    private engine: DiagramEngine;
+    constructor(props: AppProps) {
+        super(props);
+        this.initEngine();
     }
+    private initEngine = () => {
+        this.engine = createEngine();
+
+        this.engine
+            .getPortFactories()
+            .registerFactory(
+                new SimplePortFactory(
+                    "diamond",
+                    config => new DiamondPortModel(PortModelAlignment.LEFT)
+                )
+            );
+        this.engine.getNodeFactories().registerFactory(new DiamondNodeFactory());
+    };
 
     getData = async () => {
         const instance = axios.create({ baseURL: "http://localhost:4000" });
@@ -30,21 +48,30 @@ export class App extends Component<AppProps> {
         return data;
     };
 
-    preRenderDiagram = () => {
+    diagram = () => {
         if (this.state.elements.length > 0) {
             return (
-                <Diagram elements={this.state.elements} engine={this.state.engine} />
+                <Diagram
+                    elements={this.state.elements}
+                    engine={this.engine as DiagramEngine}
+                />
             );
         } else {
             return null;
         }
     };
 
+    componentDidMount() {
+        this.getData().then(({ data }) => {
+            this.setState({ elements: data });
+        });
+    }
+
     render() {
         return (
             <div className="container">
                 <Header title="Header" />
-                {this.preRenderDiagram()}
+                {this.diagram()}
                 <Footer title="Footer" />
             </div>
         );

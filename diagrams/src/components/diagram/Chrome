@@ -1,0 +1,11 @@
+;; Eval Buffer with `M-x eval-buffer' to register the newly created template.
+
+(dap-register-debug-template
+  "Chrome Browse URL"
+  (list :type "chrome"
+        :cwd nil
+        :mode "url"
+        :request "launch"
+        :webRoot "/home/tocha/develop/wilpride_electric_diagram/frontend/diagram"
+        :url "http://localhost:3000"
+        :name "Chrome Browse URL"))

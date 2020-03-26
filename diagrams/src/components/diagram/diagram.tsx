@@ -4,10 +4,12 @@ import {
     DiagramEngine,
     DiagramModel
 } from "@projectstorm/react-diagrams";
+import * as events from "events";
 import * as React from "react";
 import { ElementProps } from "../element/element";
+import { MainNodeModel } from "../MainNode/MainNodeModel";
 import "./Diagram.scss";
-import * as events from "events";
+import { DiamondNodeModel } from "../custom-node/DiamondNodeModel";
 
 interface DiagramProps {
     elements: ElementProps[];
@@ -32,6 +34,11 @@ export class Diagram extends React.Component<DiagramProps> {
             node.setPosition(100, 100 * (-index + 1));
             this.nodes.push(node);
         });
+
+        let node2 = new DiamondNodeModel();
+        this.nodes.push(node2);
+        node2.setPosition(250, 108);
+
         this.model.addAll(...this.nodes);
         this.props.engine.setModel(this.model);
     }
