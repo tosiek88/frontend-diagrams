@@ -6,7 +6,7 @@ import {
 } from "@projectstorm/react-diagrams";
 
 export class MainPortModel extends PortModel {
-    constructor(alignment: PortModelAlignment) {
+    constructor(alignment?: PortModelAlignment) {
         super({
             type: "basic",
             name: "basic",

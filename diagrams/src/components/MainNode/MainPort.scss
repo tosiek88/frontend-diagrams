@@ -1,0 +1,51 @@
+$margin-dist: -4px;
+$absolute-dist: 0px;
+$size: 6px;
+%shape {
+  position: absolute;
+  border-radius: 50%;
+  width: $size;
+  height: $size;
+
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  margin-top: 1px;
+  &:hover {
+    background: rgba(0, 0, 0, 1);
+  }
+}
+
+.left {
+  margin-left: $margin-dist;
+  left: $absolute-dist;
+  @extend %shape;
+}
+
+.right {
+  margin-right: $margin-dist;
+  right: $absolute-dist;
+
+  @extend %shape;
+}
+
+.main {
+  position: relative;
+  width: 150px;
+  height: 100px;
+  background: lightslategray;
+  border-radius: 10px;
+  opacity: 0.75;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.node-title {
+  color: white;
+  font-size: 11px;
+  background: cornflowerblue;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  font-weight: bold;
+  padding: 2px;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.7);
+}

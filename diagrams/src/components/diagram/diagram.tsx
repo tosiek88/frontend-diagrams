@@ -1,15 +1,10 @@
 import { CanvasWidget } from "@projectstorm/react-canvas-core";
-import {
-    DefaultNodeModel,
-    DiagramEngine,
-    DiagramModel
-} from "@projectstorm/react-diagrams";
+import { DiagramEngine, DiagramModel } from "@projectstorm/react-diagrams";
 import * as events from "events";
 import * as React from "react";
 import { ElementProps } from "../element/element";
 import { MainNodeModel } from "../MainNode/MainNodeModel";
 import "./Diagram.scss";
-import { DiamondNodeModel } from "../custom-node/DiamondNodeModel";
 
 interface DiagramProps {
     elements: ElementProps[];
@@ -27,18 +22,10 @@ export class Diagram extends React.Component<DiagramProps> {
 
     private preRender() {
         this.props.elements.forEach((el, index) => {
-            let node = new DefaultNodeModel({
-                name: el.name,
-                color: "rgb(0,192,255)"
-            });
-            node.setPosition(100, 100 * (-index + 1));
+            let node = new MainNodeModel();
+            node.setPosition(100, 150 * (-index + 1));
             this.nodes.push(node);
         });
-
-        let node2 = new MainNodeModel();
-        this.nodes.push(node2);
-        node2.setPosition(250, 108);
-
         this.model.addAll(...this.nodes);
         this.props.engine.setModel(this.model);
     }

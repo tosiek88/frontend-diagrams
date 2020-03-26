@@ -12,8 +12,6 @@ import { Header } from "./components/header/header";
 import { SimplePortFactory } from "./components/MainNode/SimplePortFactory";
 import { MainPortModel } from "./components/MainNode/MainPortModel";
 import { MainNodeFactory } from "./components/MainNode/MainFactoryModel";
-import { DiamondPortModel } from "./components/custom-node/DiamondPortModel";
-import { DiamondNodeFactory } from "./components/custom-node/DiamondNodeFactory";
 
 type AppProps = {
     msg?: string;
@@ -34,10 +32,7 @@ export class App extends Component<AppProps> {
         this.engine
             .getPortFactories()
             .registerFactory(
-                new SimplePortFactory(
-                    "basic",
-                    config => new MainPortModel(PortModelAlignment.LEFT)
-                )
+                new SimplePortFactory("basic", config => new MainPortModel())
             );
         this.engine.getNodeFactories().registerFactory(new MainNodeFactory());
     };
