@@ -35,11 +35,11 @@ export class App extends Component<AppProps> {
             .getPortFactories()
             .registerFactory(
                 new SimplePortFactory(
-                    "diamond",
-                    config => new DiamondPortModel(PortModelAlignment.LEFT)
+                    "basic",
+                    config => new MainPortModel(PortModelAlignment.LEFT)
                 )
             );
-        this.engine.getNodeFactories().registerFactory(new DiamondNodeFactory());
+        this.engine.getNodeFactories().registerFactory(new MainNodeFactory());
     };
 
     getData = async () => {

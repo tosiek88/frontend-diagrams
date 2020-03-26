@@ -1,6 +1,6 @@
 import { MainNodeModel } from "./MainNodeModel";
 import styled from "@emotion/styled";
-import { DiagramEngine } from "@projectstorm/react-diagrams";
+import { DiagramEngine, PortWidget } from "@projectstorm/react-diagrams";
 import React from "react";
 
 export interface MainNodeWidgetProps {
@@ -24,15 +24,30 @@ export let Port = styled.div`
 
 export class MainNodeWidget extends React.Component<MainNodeWidgetProps> {
     render() {
+        console.log(this.props, `MAIN NODE `);
         return (
             <div
                 className={"main"}
                 style={{
                     position: "relative",
                     width: "100px",
-                    height: "100px"
+                    height: "100px",
+                    background: "blue"
                 }}
-            ></div>
+            >
+                <PortWidget
+                    port={this.props.node.getPort("basic")}
+                    engine={this.props.engine}
+                >
+                    <Port />
+                </PortWidget>
+                <PortWidget
+                    port={this.props.node.getPort("basic")}
+                    engine={this.props.engine}
+                >
+                    <Port />
+                </PortWidget>
+            </div>
         );
     }
 }

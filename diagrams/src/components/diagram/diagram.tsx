@@ -35,7 +35,7 @@ export class Diagram extends React.Component<DiagramProps> {
             this.nodes.push(node);
         });
 
-        let node2 = new DiamondNodeModel();
+        let node2 = new MainNodeModel();
         this.nodes.push(node2);
         node2.setPosition(250, 108);
 
