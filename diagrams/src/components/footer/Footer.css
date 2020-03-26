@@ -2,4 +2,5 @@
   text-align: center;
   padding: 16px;
   background-color: green;
+  grid-area: footer;
 }
