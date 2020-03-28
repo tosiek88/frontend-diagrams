@@ -25,10 +25,26 @@ $size: 6px;
 .right {
   margin-right: $margin-dist;
   right: $absolute-dist;
-
   @extend %shape;
 }
 
+%container {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+}
+
+.container-left {
+  left: 0px;
+  // background: blue;
+  @extend %container;
+}
+
+.container-right {
+  right: 0px;
+  // background: red;
+  @extend %container;
+}
 .main {
   position: relative;
   width: 150px;

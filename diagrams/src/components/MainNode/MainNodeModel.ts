@@ -8,32 +8,36 @@ import { MainPortModel } from "./MainPortModel";
 
 export interface MainNodeModelGenerics {
     name: string;
-    aligment: PortModelAlignment;
+    aligment?: PortModelAlignment;
 }
 
 export class MainNodeModel extends NodeModel<
     NodeModelGenerics & MainNodeModelGenerics
     > {
     private inPorts: PortModel[] = [];
-    private outPort: PortModel[] = [];
-    constructor() {
+    private outPorts: PortModel[] = [];
+    public name: string;
+    constructor(props: MainNodeModelGenerics) {
         super({
             type: "basic"
         });
-        this.addInputPort();
-        this.addOutputPort();
+
+        this.name = props.name;
     }
 
-    public addInputPort() {
-        const portModel = new MainPortModel(PortModelAlignment.LEFT);
+    public getInOutPorts(): { input: PortModel[]; output: PortModel[] } {
+        return { input: this.inPorts, output: this.outPorts };
+    }
+
+    public addInputPort(name: string) {
+        const portModel = new MainPortModel(name, PortModelAlignment.LEFT);
         this.addPort(portModel);
         this.inPorts.push(portModel);
     }
 
-    public addOutputPort() {
-        const portModel = new MainPortModel(PortModelAlignment.RIGHT);
+    public addOutputPort(name: string) {
+        const portModel = new MainPortModel(name, PortModelAlignment.RIGHT);
         this.addPort(portModel);
-
-        this.outPort.push(portModel);
+        this.outPorts.push(portModel);
     }
 }

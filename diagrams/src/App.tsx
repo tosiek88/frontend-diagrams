@@ -1,4 +1,7 @@
-import createEngine, { DiagramEngine } from "@projectstorm/react-diagrams";
+import createEngine, {
+    DiagramEngine,
+    PortModelAlignment
+} from "@projectstorm/react-diagrams";
 import axios from "axios";
 import * as React from "react";
 import { Component } from "react";
@@ -29,7 +32,19 @@ export class App extends Component<AppProps> {
         this.engine
             .getPortFactories()
             .registerFactory(
-                new SimplePortFactory("basic", config => new MainPortModel())
+                new SimplePortFactory(
+                    "left",
+                    config => new MainPortModel("left", PortModelAlignment.LEFT)
+                )
+            );
+
+        this.engine
+            .getPortFactories()
+            .registerFactory(
+                new SimplePortFactory(
+                    "right",
+                    config => new MainPortModel("right", PortModelAlignment.RIGHT)
+                )
             );
         this.engine.getNodeFactories().registerFactory(new MainNodeFactory());
     };

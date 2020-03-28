@@ -21,10 +21,11 @@ export class Diagram extends React.Component<DiagramProps> {
     }
 
     private preRender() {
+        // Foreach elements generate node
         this.props.elements.forEach((el, index) => {
-            let node = new MainNodeModel();
-            node.addInputPort();
-            node.addOutputPort();
+            let node = new MainNodeModel({ name: el.name });
+            node.addInputPort("AN2900");
+            node.addOutputPort("P0010");
             node.setPosition(100, 150 * (-index + 1));
             this.nodes.push(node);
         });
