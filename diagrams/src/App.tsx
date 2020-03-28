@@ -1,6 +1,6 @@
 import createEngine, {
-    PortModelAlignment,
-    DiagramEngine
+    DiagramEngine,
+    PortModelAlignment
 } from "@projectstorm/react-diagrams";
 import axios from "axios";
 import * as React from "react";
@@ -12,8 +12,6 @@ import { Header } from "./components/header/header";
 import { SimplePortFactory } from "./components/MainNode/SimplePortFactory";
 import { MainPortModel } from "./components/MainNode/MainPortModel";
 import { MainNodeFactory } from "./components/MainNode/MainFactoryModel";
-import { DiamondPortModel } from "./components/custom-node/DiamondPortModel";
-import { DiamondNodeFactory } from "./components/custom-node/DiamondNodeFactory";
 
 type AppProps = {
     msg?: string;
@@ -35,8 +33,17 @@ export class App extends Component<AppProps> {
             .getPortFactories()
             .registerFactory(
                 new SimplePortFactory(
-                    "basic",
-                    config => new MainPortModel(PortModelAlignment.LEFT)
+                    "left",
+                    config => new MainPortModel("left", PortModelAlignment.LEFT)
+                )
+            );
+
+        this.engine
+            .getPortFactories()
+            .registerFactory(
+                new SimplePortFactory(
+                    "right",
+                    config => new MainPortModel("right", PortModelAlignment.RIGHT)
                 )
             );
         this.engine.getNodeFactories().registerFactory(new MainNodeFactory());

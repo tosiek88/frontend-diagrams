@@ -17,6 +17,6 @@ export class MainNodeFactory extends AbstractReactFactory<
     }
 
     generateModel(event: any) {
-        return new MainNodeModel();
+        return new MainNodeModel({ name: event.name });
     }
 }
