@@ -1,52 +1,46 @@
 import { MainNodeModel } from "./MainNodeModel";
-import styled from "@emotion/styled";
-import { DiagramEngine, PortWidget } from "@projectstorm/react-diagrams";
+import { DiagramEngine, PortModel } from "@projectstorm/react-diagrams";
 import React from "react";
+import { MainPort } from "./MainPorts";
 
 export interface MainNodeWidgetProps {
     node: MainNodeModel;
     engine: DiagramEngine;
     size?: number;
 }
-
-export let Port = styled.div`
-  width: 16px;
-  height: 16px;
-  z-index: 10;
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 8px;
-  cursor: pointer;
-
-  &:hover {
-    background: rgba(0, 0, 0, 1);
-  }
-`;
-
+//Node means phisical element like switchboard
 export class MainNodeWidget extends React.Component<MainNodeWidgetProps> {
-    render() {
-        console.log(this.props, `MAIN NODE `);
+    public InputPorts: JSX.Element[];
+    public OutputPorts: JSX.Element[];
+
+    constructor(props: MainNodeWidgetProps) {
+        super(props);
+        this.generatePorts();
+    }
+
+    private generatePort = (it: PortModel) => {
         return (
-            <div
-                className={"main"}
-                style={{
-                    position: "relative",
-                    width: "100px",
-                    height: "100px",
-                    background: "blue"
-                }}
-            >
-                <PortWidget
-                    port={this.props.node.getPort("basic")}
-                    engine={this.props.engine}
-                >
-                    <Port />
-                </PortWidget>
-                <PortWidget
-                    port={this.props.node.getPort("basic")}
-                    engine={this.props.engine}
-                >
-                    <Port />
-                </PortWidget>
+            <MainPort
+                key={it.getID()}
+                port={it}
+                node={this.props.node}
+                engine={this.props.engine}
+            />
+        );
+    };
+
+    private generatePorts = () => {
+        const { input, output } = this.props.node.getInOutPorts();
+        this.InputPorts = input.map(this.generatePort);
+        this.OutputPorts = output.map(this.generatePort);
+    };
+
+    render() {
+        return (
+            <div className="main">
+                <div className="node-title">{this.props.node.name}</div>
+                <div className="container-left">{this.InputPorts}</div>
+                <div className="container-right">{this.OutputPorts}</div>
             </div>
         );
     }
