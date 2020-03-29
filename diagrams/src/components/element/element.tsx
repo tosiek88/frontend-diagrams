@@ -3,7 +3,7 @@ import { FunctionComponent } from "react";
 
 export interface ElementProps {
     name?: string;
-    connections?: [];
+    connections?: { label: string; flow: "input" | "output" }[];
 }
 
 export const DiagramElement: FunctionComponent<ElementProps> = (
