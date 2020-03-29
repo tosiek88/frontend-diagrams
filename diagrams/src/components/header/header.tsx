@@ -1,11 +1,11 @@
 import * as React from "react";
 import { FunctionComponent } from "react";
-import "./Header.css";
+import "./Header.scss";
 
 type HeaderProps = {
-  title: string;
+    title: string;
 };
 
 export const Header: FunctionComponent<HeaderProps> = ({ title }) => (
-  <div className="Header">{title}</div>
+    <div className="Header">{title}</div>
 );

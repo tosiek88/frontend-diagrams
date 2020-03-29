@@ -6,8 +6,8 @@ import {
 import React from "react";
 import { MainNodeModel } from "./MainNodeModel";
 import "./MainPort.scss";
-import { ConnectionName, Container } from "./StyledComponentsMainPort";
 import { MainPortModel } from "./MainPortModel";
+import { ConnectionName, Container } from "./StyledComponentsMainPort";
 
 export interface MainPortArgs {
     node: MainNodeModel;
@@ -22,7 +22,6 @@ export const MainPort = (props: MainPortArgs) => {
             <PortWidget
                 port={props.port as PortModel}
                 engine={props.engine}
-                style={{ background: "blue" }}
                 className={props.port.getOptions().alignment}
             />
             <ConnectionName aligment={props.port.getOptions().alignment}>

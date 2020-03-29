@@ -1,6 +1,6 @@
-$margin-dist: -4px;
 $absolute-dist: 0px;
-$size: 6px;
+$size: 10px;
+$margin-dist: -($size/2);
 %shape {
   position: absolute;
   border-radius: 50%;
