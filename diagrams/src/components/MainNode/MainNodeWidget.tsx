@@ -2,6 +2,7 @@ import { MainNodeModel } from "./MainNodeModel";
 import { DiagramEngine, PortModel } from "@projectstorm/react-diagrams";
 import React from "react";
 import { MainPort } from "./MainPorts";
+import { MainPortModel } from "./MainPortModel";
 
 export interface MainNodeWidgetProps {
     node: MainNodeModel;
@@ -10,8 +11,8 @@ export interface MainNodeWidgetProps {
 }
 //Node means phisical element like switchboard
 export class MainNodeWidget extends React.Component<MainNodeWidgetProps> {
-    public InputPorts: JSX.Element[];
-    public OutputPorts: JSX.Element[];
+    public InputPorts: JSX.Element[] = [];
+    public OutputPorts: JSX.Element[] = [];
 
     constructor(props: MainNodeWidgetProps) {
         super(props);
@@ -22,7 +23,7 @@ export class MainNodeWidget extends React.Component<MainNodeWidgetProps> {
         return (
             <MainPort
                 key={it.getID()}
-                port={it}
+                port={it as MainPortModel}
                 node={this.props.node}
                 engine={this.props.engine}
             />
