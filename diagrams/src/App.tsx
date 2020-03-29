@@ -21,20 +21,18 @@ export class App extends Component<AppProps> {
     state = {
         elements: []
     };
-    private engine: DiagramEngine;
+    private engine: DiagramEngine = createEngine();
     constructor(props: AppProps) {
         super(props);
         this.initEngine();
     }
     private initEngine = () => {
-        this.engine = createEngine();
-
         this.engine
             .getPortFactories()
             .registerFactory(
                 new SimplePortFactory(
                     "left",
-                    config => new MainPortModel("left", PortModelAlignment.LEFT)
+                    () => new MainPortModel("left", PortModelAlignment.LEFT)
                 )
             );
 
@@ -43,7 +41,7 @@ export class App extends Component<AppProps> {
             .registerFactory(
                 new SimplePortFactory(
                     "right",
-                    config => new MainPortModel("right", PortModelAlignment.RIGHT)
+                    () => new MainPortModel("right", PortModelAlignment.RIGHT)
                 )
             );
         this.engine.getNodeFactories().registerFactory(new MainNodeFactory());
